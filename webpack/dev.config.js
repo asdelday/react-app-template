@@ -23,30 +23,43 @@ module.exports = {
     publicPath: `http://${host}:${port}/dist/`,
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel', 'eslint'] },
-      { test: /\.scss$/, exclude: [/components.scss/], loader: 'style!css?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]!postcss' },
-      { test: /\.scss$/, include: [/components.scss/], loader: 'style!css!postcss' },
-      { test: /\.css$/, loader: 'style!css!postcss' },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: config.webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url?limit=10240' },
+    rules: [
+      // JSX? - Files - ESLINT
+      { test: /\.jsx?$/, exclude: /node_modules/, enforce: 'pre', loader: 'eslint-loader' },
+
+      // JSX? - Files - BABEL
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
+
+      // SCSS - Files - [STYLE-CSS-POSTCSS]
+      { test: /\.scss$/, include: /components.scss/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
+      {
+        test: /\.scss$/,
+        exclude: /components.scss/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]',
+          'postcss-loader',
+        ],
+      },
+
+      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
+      { test: config.webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
     ],
   },
-  postcss: config.postcss,
   externals: config.externals,
-  progress: true,
   resolve: {
-    modulesDirectories: ['src', 'node_modules'],
-    extensions: ['', '.json', '.js', '.jsx'],
+    modules: ['src', 'node_modules'],
+    extensions: ['.json', '.js', '.jsx'],
+    unsafeCache: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('development') },
 
