@@ -1,0 +1,6 @@
+{
+  "name": "DevTools",
+  "main": "DevTools.jsx",
+  "private": true,
+  "version": "1.0.0"
+}

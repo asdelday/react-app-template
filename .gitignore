@@ -1,0 +1,15 @@
+.idea/
+.vscode/
+pos-web-air-shop.njsproj
+pos-web-air-shop.sln
+.vs/
+.ntvs_analysis.dat
+node_modules/
+dist/
+lib/
+styleguide/
+coverage/
+webpack-assets.json
+*.iml
+npm-debug.log*
+yarn-error.log*

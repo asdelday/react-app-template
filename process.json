@@ -1,0 +1,19 @@
+{
+  "apps": [
+    {
+      "name": "server",
+      "script": "./bin/server.js",
+      "watch": true,
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8080
+      },
+      "env_development": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "PORT": 3000
+      }
+    }
+  ]
+}

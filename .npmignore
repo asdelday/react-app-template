@@ -1,0 +1,9 @@
+.idea/
+docs/
+node_modules/
+webpack/
+styleguide/
+coverage/
+*.iml
+npm-debug.log*
+yarn-error.log*

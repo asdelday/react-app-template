@@ -1,0 +1,6 @@
+dist/
+lib/
+static/
+node_modules/
+styleguide/
+coverage/
