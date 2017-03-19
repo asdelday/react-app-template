@@ -170,3 +170,16 @@ If you have the
 
 If you want to disable the dev tools during development, set `__DEVTOOLS__` to `false` in `/webpack/dev.config.js`.  
 DevTools are not enabled during production.
+
+
+## TODO:
+
+- Update to react-router v4
+- Update to Webpack 2
+- Remove webpack-isomorphic-tools for SSR
+- Implements PWA
+- Improve Documentation
+- Clean unnecessary dependencies
+- Improve testing
+- Centralize config
+- Change public env variables to use a .env file instead better-npm-run
