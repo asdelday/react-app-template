@@ -26,15 +26,6 @@ module.exports = {
   // Include here all the libraries which must be outside the production bundle
   externals: {},
 
-  // POST-CSS Configuration
-  postcss: () => [
-    require('postcss-import')(),
-    // require('postcss-url')(),
-    require('postcss-cssnext')(),
-    // add your 'plugins' here ...
-    require('postcss-reporter')(),
-  ],
-
   // Webpack Isomorphic Tools Plugin
   webpackIsomorphicToolsPlugin,
 };
