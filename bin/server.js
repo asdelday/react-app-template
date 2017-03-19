@@ -10,7 +10,7 @@ const rootDir = path.resolve(__dirname, '..');
  */
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
-global.__DISABLE_SSR__ = false;  // <----- DISABLES SERVER SIDE RENDERING FOR ERROR DEBUGGING
+global.__DISABLE_SSR__ = true;  // <----- DISABLES SERVER SIDE RENDERING FOR ERROR DEBUGGING
 global.__CORE_HELPER__ = process.env.CORE_HELPER || 'DESKTOP';
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 

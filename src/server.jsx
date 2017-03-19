@@ -6,8 +6,8 @@ import favicon from 'serve-favicon';
 import compression from 'compression';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import { match, createMemoryHistory as createHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { match } from 'react-router';
+import createHistory from 'history/createMemoryHistory';
 
 import config from './config';
 import createStore from './redux/create';
@@ -32,9 +32,8 @@ app.use((req, res) => {
 
   const originalUrl = req.originalUrl;
 
-  const memoryHistory = createHistory(originalUrl);
-  const store = createStore(memoryHistory);
-  const history = syncHistoryWithStore(memoryHistory, store);
+  const history = createHistory(originalUrl);
+  const store = createStore(history);;
   const routes = getRoutes(store);
   const assets = global.webpackIsomorphicTools.assets();
 

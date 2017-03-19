@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { ConnectedRouter as Router } from 'react-router-redux';
 import getRoutes from 'routes';
 
 export class Root extends Component {
