@@ -25,7 +25,7 @@ class Html extends Component {
   render() {
     const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
-    const head = Helmet.rewind();
+    const head = Helmet.renderStatic();
     const styles = (assets && assets.styles) || undefined;
     const javascript = (assets && assets.javascript) || undefined;
 
