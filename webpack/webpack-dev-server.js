@@ -16,7 +16,6 @@ const devServerSettings = {
   // publicPath: webpackConfig.output.publicPath,
 
   // Console Output options
-  progress: true,
   quiet: false,
   noInfo: false,
   stats: {

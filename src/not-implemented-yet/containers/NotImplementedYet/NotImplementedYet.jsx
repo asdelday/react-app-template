@@ -3,7 +3,11 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import _styles from './NotImplementedYet.scss';
 
-class NotImplementedYet extends Component {
+/**
+ * Container Component which is used to show a Non Implemented Yet message
+ * @class
+ */
+export class NotImplementedYet extends Component {
   static propTypes = {
     text: PropTypes.string,
     className: PropTypes.string,

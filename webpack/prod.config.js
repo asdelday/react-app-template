@@ -17,25 +17,42 @@ module.exports = {
     publicPath: '/dist/',
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] },
-      { test: /\.scss$/, exclude: [/components.scss/], loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]!postcss') },
-      { test: /\.scss$/, include: [/components.scss/], loader: ExtractTextPlugin.extract('style', 'css!postcss') },
-      { test: /\.css$/, loader: 'style!css!postcss' },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: config.webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url?limit=10240' },
+    rules: [
+      // JSX? - Files - BABEL
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
+
+      // SCSS - Files - [STYLE-CSS-POSTCSS]
+      {
+        test: /\.scss$/,
+        include: /components.scss/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader'],
+        }),
+      },
+      {
+        test: /\.scss$/,
+        exclude: /components.scss/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?modules&importLoaders=1&minimize&sourceMap&localIdentName=[name]__[local]',
+            'postcss-loader',
+          ],
+        }),
+      },
+
+      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
+      { test: config.webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
     ],
   },
-  postcss: config.postcss,
-  progress: true,
   resolve: {
-    modulesDirectories: ['src', 'node_modules'],
-    extensions: ['', '.json', '.js', '.jsx'],
+    modules: ['src', 'node_modules'],
+    extensions: ['.json', '.js', '.jsx'],
   },
   plugins: [
     new CleanPlugin([config.paths.dist], { root: config.paths.root }),
@@ -52,14 +69,10 @@ module.exports = {
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // Extract CSS
-    new ExtractTextPlugin(`${config.chunkFilename}.css`, { allChunks: true }),
+    new ExtractTextPlugin({ filename: `${config.filename}.css` }),
 
     // optimizations
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-    }),
+    new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
 
     config.webpackIsomorphicToolsPlugin,
   ],

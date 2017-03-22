@@ -26,6 +26,8 @@
     "no-underscore-dangle": "off",
     "global-require": "off",
 
+    "valid-jsdoc": [2, { "requireReturn": false }],
+
     "react/prefer-stateless-function": "off",
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off"
