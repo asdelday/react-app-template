@@ -175,7 +175,7 @@ DevTools are not enabled during production.
 ## TODO:
 
 - Update to react-router v4
-- Update to Webpack 2
+- ~~Update to Webpack 2~~
 - Enable Tree Shaking
 - Remove webpack-isomorphic-tools for SSR
 - Implements PWA
