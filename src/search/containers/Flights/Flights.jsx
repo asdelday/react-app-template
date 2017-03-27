@@ -29,10 +29,10 @@ class Flights extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const cars = state.search.cars;
+  const flights = state.search.flights;
 
   return {
-    text: cars.text,
+    text: flights.text,
   };
 };
 

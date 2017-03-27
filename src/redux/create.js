@@ -22,8 +22,16 @@ export default (history, data) => {
 
     _createStore = compose(
       applyMiddleware(...middleware),
-      DevTools.instrument(),
+      (window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window.__REDUX_DEVTOOLS_EXTENSION__()
+        : DevTools.instrument()
+      ),
       persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/)),
+    )(createStore);
+  } else if (__CLIENT__ && __DEVTOOLS__) {
+    _createStore = compose(
+      applyMiddleware(...middleware),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     )(createStore);
   } else {
     _createStore = applyMiddleware(...middleware)(createStore);
