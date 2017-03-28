@@ -4,7 +4,7 @@ import config from 'config';
 import cx from 'classnames';
 import { connect } from 'react-redux';
 import { Link, IndexLink } from 'react-router';
-import _styles from './App.scss';
+import _styles from './App.css';
 import logo from './logo.png';
 
 export class App extends Component {

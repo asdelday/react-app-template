@@ -31,10 +31,10 @@ module.exports = {
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
 
       // SCSS - Files - [STYLE-CSS-POSTCSS]
-      { test: /\.scss$/, include: /components.scss/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
+      { test: /\.css$/, include: /components.css/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
       {
-        test: /\.scss$/,
-        exclude: /components.scss/,
+        test: /\.css$/,
+        exclude: /components.css/,
         use: [
           'style-loader',
           'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]',

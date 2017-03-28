@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Helmet from 'react-helmet';
 import cx from 'classnames';
 import { connect } from 'react-redux';
-import _styles from './Cars.scss';
+import _styles from './Cars.css';
 
 class Cars extends Component {
   static propTypes = {

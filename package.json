@@ -34,7 +34,7 @@
   },
   "betterScripts": {
     "build-server": {
-      "command": "webpack --colors --display-error-details --config webpack/server.config.js",
+      "command": "webpack --colors --display-error-details --config webpack/webpack.config.js",
       "env": {
         "NODE_ENV": "production"
       }

@@ -30,16 +30,16 @@ module.exports = {
 
       // SCSS - Files - [STYLE-CSS-POSTCSS]
       {
-        test: /\.scss$/,
-        include: /components.scss/,
+        test: /\.css$/,
+        include: /components.css/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader'],
         }),
       },
       {
-        test: /\.scss$/,
-        exclude: /components.scss/,
+        test: /\.css$/,
+        exclude: /components.css/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [

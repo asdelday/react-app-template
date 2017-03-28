@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
 import { connect } from 'react-redux';
-import _styles from './NotImplementedYet.scss';
+import _styles from './NotImplementedYet.css';
 
 /**
  * Container Component which is used to show a Non Implemented Yet message
