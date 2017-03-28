@@ -16,6 +16,8 @@ This is a starter boilerplate to create react applications which uses the follow
     * [React Router](https://github.com/ReactTraining/react-router) - Router library for React
     * [React Helmet](https://github.com/nfl/react-helmet) - A document head manager for React
     * [Redux](http://redux.js.org/) - Application state management system
+    * [Reselect](https://github.com/reactjs/reselect) - Selector library for Redux to improve performance
+    * [Redux Saga](https://redux-saga.github.io/redux-saga/) - Library that aims to make side effects in React/Redux applications easier and better
     * [Classnames](https://github.com/JedWatson/classnames) - A simple javascript utility for conditionally joining classNames together
     * [Webpack Isomorphic Tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) - Server-side rendering for your Webpack-built applications
   
@@ -44,7 +46,6 @@ This is a starter boilerplate to create react applications which uses the follow
   * **Other tools:**
     * [Better NPM Run](https://github.com/benoror/better-npm-run) - Cross Platform smart and easy way to handle environment variables
     * [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) - Server for development purposes
-    * [Styleguidist](https://github.com/styleguidist/react-styleguidist) - Generates Component documentation easily
     * [React Hot Loader](https://github.com/gaearon/react-hot-loader) - Enables the awesome React Hot Loader feature for a better development experience
     * [Redux DevTools](https://github.com/gaearon/redux-devtools) - DevTools for Redux with hot reloading, action replay, and customizable UI
   
