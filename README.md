@@ -53,8 +53,7 @@ This is a starter boilerplate to create react applications which uses the follow
 
 ### Installation
 
-**Important:** be care if the project has its own `.npmrc`. If the project has an own registry
-configure it properly.
+**Important:** be care, this project has its own `.npmrc` to configure some rules for the package manager.
 
 ```bash
 npm install
