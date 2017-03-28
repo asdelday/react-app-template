@@ -3,6 +3,38 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware, { END } from 'redux-saga';
 import reducer from './modules/root';
 
+const getStoreCreator = (middleware) => {
+  const composedBy = [];
+
+  // MIDDLEWARE
+  if (middleware && middleware.length) {
+    composedBy.push(applyMiddleware(...middleware));
+  }
+
+  // DEVTOOLS
+  if (__DEVTOOLS__) {
+    const devToolsExtension = (
+      typeof window !== 'undefined' &&
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
+
+    if (devToolsExtension) {
+      composedBy.push(devToolsExtension);
+    } else if (__DEVELOPMENT__ && __CLIENT__) {
+      const { persistState } = require('redux-devtools');
+      const DevTools = require('containers/DevTools');
+
+      composedBy.push(
+        DevTools.instrument(),
+        persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/)),
+      );
+    }
+  }
+
+  return composedBy.length ? compose(...composedBy)(createStore) : createStore;
+};
+
 export default (history, data) => {
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = routerMiddleware(history);
@@ -13,32 +45,8 @@ export default (history, data) => {
   // All your middleware goes here
   const middleware = [reduxRouterMiddleware, sagaMiddleware];
 
-  // Creating the store, we should consider in a different way when we are at
-  // Development env bundling client with Devtools enabled
-  let _createStore;
-  if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
-    const { persistState } = require('redux-devtools');
-    const DevTools = require('containers/DevTools');
-
-    _createStore = compose(
-      applyMiddleware(...middleware),
-      (window.__REDUX_DEVTOOLS_EXTENSION__
-        ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : DevTools.instrument()
-      ),
-      persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/)),
-    )(createStore);
-  } else if (__CLIENT__ && __DEVTOOLS__) {
-    _createStore = compose(
-      applyMiddleware(...middleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    )(createStore);
-  } else {
-    _createStore = applyMiddleware(...middleware)(createStore);
-  }
-
   // Create the store
-  const store = _createStore(reducer, data);
+  const store = getStoreCreator(middleware)(reducer, data);
 
   // Enable reducer module hot replacement
   if (__DEVELOPMENT__ && module.hot) {

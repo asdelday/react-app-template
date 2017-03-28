@@ -1,3 +1,5 @@
+import 'globalize';
+
 import path from 'path';
 import Express from 'express';
 import React from 'react';
@@ -14,14 +16,16 @@ import createStore from './redux/create';
 import Html from './helpers/Html';
 import RootContainer from './containers/Root';
 import getRoutes from './routes';
+import assets from '../webpack-assets.json';
 
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 
+console.log(process.cwd());
 app.use(compression());
-app.use(Express.static(path.join(__dirname, '..', 'static')));
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(Express.static(path.join(process.cwd(), '..', 'static')));
+app.use(favicon(path.join(process.cwd(), '..', 'static', 'favicon.ico')));
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -36,7 +40,6 @@ app.use((req, res) => {
   const store = createStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
   const routes = getRoutes(store);
-  const assets = global.webpackIsomorphicTools.assets();
 
   function hydrateOnClient() {
     const htmlComponent = <Html assets={assets} store={store} />;

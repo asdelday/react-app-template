@@ -28,9 +28,18 @@
     "version-minor": "npm version minor -m \"v%s\"",
     "version-patch": "npm version patch -m \"v%s\"",
     "posttest": "npm run lint",
-    "preversion": "npm test"
+    "preversion": "npm test",
+
+    "build-server": "bnr build-server"
   },
   "betterScripts": {
+    "build-server": {
+      "command": "webpack --colors --display-error-details --config webpack/server.config.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+
     "start-prod": {
       "command": "node ./bin/server.js",
       "env": {

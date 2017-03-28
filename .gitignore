@@ -6,6 +6,7 @@ pos-web-air-shop.sln
 .ntvs_analysis.dat
 node_modules/
 dist/
+compiled/
 lib/
 styleguide/
 coverage/
