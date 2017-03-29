@@ -1,5 +1,3 @@
-const PATHS = require('../paths');
-
 /**
  * Retrieve an array with the rules for the javascript [babel] due to the configuration passed
  * @param {boolean} production - flag which indicates if is a production env

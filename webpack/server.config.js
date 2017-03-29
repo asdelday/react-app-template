@@ -1,12 +1,9 @@
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('./config');
 
-const externalModules = fs.readdirSync('node_modules')
-  .filter(x => ['.bin'].indexOf(x) === -1)
-  .reduce((acc, cur) => Object.assign(acc, { [cur]: 'commonjs ' + cur }), {});
+const externalModules = require('./externals');
 
 process.env.BABEL_ENV = 'production';
 

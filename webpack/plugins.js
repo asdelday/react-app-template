@@ -16,7 +16,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
     __DEVTOOLS__: true,
   };
 
-  const  plugins = [
+  const plugins = [
     new webpack.DefinePlugin(definitions),
   ];
 
@@ -35,9 +35,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
 
   // PRODUCTION AND SERVER
   if (production && !browser) {
-    return plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
-    ]);
+    return plugins.concat([new webpack.optimize.UglifyJsPlugin({ sourceMap: true })]);
   }
 
   // PRODUCTION AND BROWSER

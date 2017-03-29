@@ -11,11 +11,11 @@ import http from 'http';
 import { match, createMemoryHistory as createHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import config from './config';
-import createStore from './redux/create';
-import Html from './helpers/Html';
-import RootContainer from './containers/Root';
-import getRoutes from './routes';
+import config from 'config';
+import createStore from 'redux/create';
+import Html from 'helpers/Html';
+import RootContainer from 'containers/Root';
+import getRoutes from 'routes';
 import assets from '../webpack-assets.json';
 
 const pretty = new PrettyError();

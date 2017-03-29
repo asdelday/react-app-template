@@ -29,6 +29,7 @@ module.exports = (env = '') => {
   const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
   const node = { __dirname: true, __filename: true };
 
+  // PRODUCTION - SERVER
   const prodServerRender = {
     devtool: 'source-map',
     context: PATHS.app,
@@ -47,6 +48,7 @@ module.exports = (env = '') => {
     plugins: plugins({ production: true, browser: false }),
   };
 
+  // PRODUCTION - BROWSER
   const prodBrowserRender = {
     devtool: 'cheap-module-source-map',
     context: PATHS.app,
@@ -60,9 +62,10 @@ module.exports = (env = '') => {
     },
     module: { rules: rules({ production: true, browser: true }) },
     resolve,
-    plugins: plugins({ production: true, browser: true })
+    plugins: plugins({ production: true, browser: true }),
   };
 
+  // DEVELOPMENT - BROWSER
   const devBrowserRender = {
     devtool: 'eval',
     context: PATHS.app,
@@ -75,9 +78,10 @@ module.exports = (env = '') => {
     },
     module: { rules: rules({ production: false, browser: true }) },
     resolve,
-    plugins: plugins({ production: false, browser: true })
+    plugins: plugins({ production: false, browser: true }),
   };
 
+  // DEVELOPMENT - SERVER
   const devServerRender = {
     devtool: 'sourcemap',
     context: PATHS.app,
@@ -98,7 +102,6 @@ module.exports = (env = '') => {
 
   const prodConfig = [prodBrowserRender, prodServerRender];
   const devConfig = isBrowser ? devBrowserRender : devServerRender;
-  const configuration = isProduction ? prodConfig : devConfig;
 
-  return configuration;
+  return isProduction ? prodConfig : devConfig;
 };
