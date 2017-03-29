@@ -15,7 +15,7 @@
  * in universal/isomorphic javascript
  */
 const path = require('path');
-const PATHS = require('./paths');
+const PATHS = require('../config/paths');
 const rules = require('./rules');
 const plugins = require('./plugins');
 const externals = require('./externals');
@@ -33,7 +33,7 @@ module.exports = (env = '') => {
   const prodServerRender = {
     devtool: 'source-map',
     context: PATHS.app,
-    entry: { server: path.join(PATHS.app, 'server.jsx') },
+    entry: { server: path.join(PATHS.server, 'index.js') },
     target: 'node',
     node,
     externals,
@@ -85,7 +85,7 @@ module.exports = (env = '') => {
   const devServerRender = {
     devtool: 'sourcemap',
     context: PATHS.app,
-    entry: { server: path.join(PATHS.app, 'server.jsx') },
+    entry: { server: path.join(PATHS.server, 'index.js') },
     target: 'node',
     node,
     externals,

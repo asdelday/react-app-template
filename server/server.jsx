@@ -76,6 +76,7 @@ app.use((req, res) => {
   );
 });
 
+/* eslint-disable no-console */
 if (config.port) {
   server.listen(config.port, (err) => {
     if (err) {
@@ -86,3 +87,4 @@ if (config.port) {
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified'); // eslint-disable-line no-console, max-len
 }
+/* eslint-enable no-console */

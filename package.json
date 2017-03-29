@@ -29,7 +29,6 @@
     "version-patch": "npm version patch -m \"v%s\"",
     "posttest": "npm run lint",
     "preversion": "npm test",
-
     "build-server": "bnr build-server"
   },
   "betterScripts": {
@@ -39,7 +38,6 @@
         "NODE_ENV": "production"
       }
     },
-
     "start-prod": {
       "command": "node ./bin/server.js",
       "env": {
@@ -90,6 +88,7 @@
     "babel-preset-stage-1": "6.22.0",
     "babel-register": "6.24.0",
     "better-npm-run": "0.0.15",
+    "body-parser": "1.17.1",
     "classnames": "2.2.5",
     "compression": "1.6.2",
     "express": "4.15.2",
@@ -152,6 +151,8 @@
     "style-loader": "0.16.0",
     "url-loader": "0.5.8",
     "webpack": "2.3.2",
-    "webpack-dev-server": "2.4.2"
+    "webpack-dev-middleware": "1.10.1",
+    "webpack-dev-server": "2.4.2",
+    "webpack-hot-middleware": "2.17.1"
   }
 }

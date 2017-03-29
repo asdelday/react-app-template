@@ -1,4 +1,4 @@
-const PATHS = require('./paths');
+const PATHS = require('../config/paths');
 
 module.exports = {
   modules: [PATHS.app, PATHS.modules],

@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssImport = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
 const postcssReporter = require('postcss-reporter');
-const PATHS = require('../paths');
+const PATHS = require('../../config/paths');
 
 /**
  * Retrieve an array with the rules for the javascript [babel] due to the configuration passed

@@ -12,8 +12,8 @@
 
 - Refactor Webpack configuration
 
-- Move server code to a new /server/ folder
+- ~~Move server code to a new /server/ folder~~
 
-- Rename src/ folder to app/
+- ~~Rename src/ folder to app/~~
 
 - Configure tests runner

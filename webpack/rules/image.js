@@ -1,4 +1,4 @@
-const PATHS = require('../paths');
+const PATHS = require('../../config/paths');
 
 /**
  * Retrieve an array with the rules for the images due to the configuration passed
