@@ -3,7 +3,8 @@
   "watch": [
     "app/routes.jsx",
     "server",
-    "webpack"
+    "webpack",
+    "config"
   ],
   "exec": "npm run build:dev && node compiled/server.dev.js"
 }

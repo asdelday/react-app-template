@@ -7,7 +7,7 @@ const path = require('path');
  */
 const CURRENT_WORKING_DIR = process.cwd();
 
-module.exports = {
+export default {
   app: path.resolve(CURRENT_WORKING_DIR, 'app'),
   server: path.resolve(CURRENT_WORKING_DIR, 'server'),
   static: 'static',

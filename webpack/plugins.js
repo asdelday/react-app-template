@@ -1,5 +1,6 @@
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as ENV from '../config/env';
 
 /**
  * Retrieve Webpack plugins due to the configuration passed
@@ -7,9 +8,16 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
  * @param {boolean} browser - flag which indicates if is a browser platform
  * @returns {Array.<*>} returns the array with the plugins
  */
-module.exports = ({ production = false, browser = false } = {}) => {
+export default ({ production = false, browser = false } = {}) => {
+  const processEnv = Object.keys(ENV).reduce((result, envKey) => {
+    const _result = result;
+    _result[envKey] = JSON.stringify(ENV[envKey]);
+
+    return _result;
+  }, {}) || {};
+
   const definitions = {
-    'process.env': { NODE_ENV: JSON.stringify(production ? 'production' : 'development') },
+    'process.env': processEnv,
     __CLIENT__: !!browser,
     __SERVER__: !browser,
     __DEVELOPMENT__: !production,
@@ -41,7 +49,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
   // PRODUCTION AND BROWSER
   if (production && browser) {
     return plugins.concat([
-      new ExtractTextPlugin({ filename: 'styles/main.css', allChunks: true }),
+      new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
       new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
     ]);
   }

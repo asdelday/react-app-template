@@ -11,7 +11,7 @@ if (isDevelopment) {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const webpackConfig = require('../webpack/webpack.config');
+  const webpackConfig = require('../webpack/webpack.config.babel');
 
   const devBrowserConfig = webpackConfig('browser') || {};
   const compiler = webpack(devBrowserConfig);
@@ -30,7 +30,7 @@ initRoutes(app);
 // renderMiddleware matches the URL with react-router and renders the app into HTML
 app.get('*', renderMiddleware);
 
-
+/* eslint-disable no-console */
 const _port = app.get('port');
 if (_port) {
   app.listen(_port, (err) => {
@@ -41,3 +41,4 @@ if (_port) {
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
 }
+/* eslint-enable no-console */

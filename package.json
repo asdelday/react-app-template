@@ -15,41 +15,31 @@
   "homepage": "https://github.com/asdelday/react-app-template",
   "main": "bin/server.js",
   "scripts": {
-    "start": "npm run start-prod",
-    "start-prod": "better-npm-run start-prod",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
-    "start-dev": "better-npm-run start-dev",
-    "watch-client": "better-npm-run watch-client",
-    "build": "better-npm-run build",
-    "test": "better-npm-run test",
-    "test:watch": "karma start",
+    "start": "npm run build && bnr start",
+    "start:dev": "bnr start:dev",
+    "build": "npm run clean && bnr build",
+    "build:dev": "bnr build:dev",
+    "test": "bnr test",
+    "test:watch": "bnr test:watch",
     "lint": "eslint . --ext .js --ext .jsx",
+    "clean": "rimraf static/dist && rimraf compiled",
     "version-major": "npm version major -m \"v%s\"",
     "version-minor": "npm version minor -m \"v%s\"",
     "version-patch": "npm version patch -m \"v%s\"",
     "posttest": "npm run lint",
-    "preversion": "npm test",
-    "build-server": "bnr build-server"
+    "preversion": "npm test"
   },
   "betterScripts": {
-    "build-server": {
-      "command": "webpack --colors --display-error-details --config webpack/webpack.config.js",
+    "start": {
+      "command": "node compiled/server.js",
       "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "start-prod": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
         "NODE_ENV": "production",
         "PORT": 8080
       }
     },
-    "start-dev": {
-      "command": "nodemon --watch src -e js,jsx ./bin/server.js",
+    "start:dev": {
+      "command": "nodemon",
       "env": {
-        "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000
       }
@@ -57,22 +47,35 @@
     "watch-client": {
       "command": "node webpack/webpack-dev-server.js",
       "env": {
-        "UV_THREADPOOL_SIZE": 100,
-        "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000
       }
     },
     "build": {
-      "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
+      "command": "webpack --colors --display-error-details --config webpack/webpack.config.babel.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    },
+    "build:dev": {
+      "command": "webpack --debug --colors --display-error-details --config webpack/webpack.config.babel.js",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 3000
       }
     },
     "test": {
       "command": "karma start",
       "env": {
+        "NODE_ENV": "test",
         "CI": true
+      }
+    },
+    "test:watch": {
+      "command": "karma start",
+      "env": {
+        "NODE_ENV": "test"
       }
     }
   },

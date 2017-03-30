@@ -1,8 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const postcssImport = require('postcss-import');
-const postcssCssnext = require('postcss-cssnext');
-const postcssReporter = require('postcss-reporter');
-const PATHS = require('../../config/paths');
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import postcssImport from 'postcss-import';
+import postcssCssnext from 'postcss-cssnext';
+import postcssReporter from 'postcss-reporter';
+import PATHS from '../../config/paths';
 
 /**
  * Retrieve an array with the rules for the javascript [babel] due to the configuration passed
@@ -10,7 +10,7 @@ const PATHS = require('../../config/paths');
  * @param {boolean} browser - flag which indicates if is a browser platform
  * @return {[*]} returns the array with the rules for the javascript [babel]
  */
-module.exports = ({ production = false, browser = false } = {}) => {
+export default ({ production = false, browser = false } = {}) => {
   /**
    * Read more about css-loader options
    * https://webpack.js.org/loaders/css-loader/#options

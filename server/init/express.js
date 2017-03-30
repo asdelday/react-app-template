@@ -3,7 +3,7 @@ import path from 'path';
 import gzip from 'compression';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
-import { PORT, ENV } from '../../config/env';
+import { PORT, NODE_ENV } from '../../config/env';
 import * as PATHS from '../../config/paths';
 
 /**
@@ -13,7 +13,7 @@ import * as PATHS from '../../config/paths';
 export default (app) => {
   app.set('port', PORT || 3000);
 
-  if (ENV === 'production') {
+  if (NODE_ENV === 'production') {
     app.use(gzip());
   }
 
@@ -27,7 +27,7 @@ export default (app) => {
   /* eslint-disable no-console */
   console.log('--------------------------');
   console.log('===> 😊  Starting Server . . .');
-  console.log(`===>  Environment: ${ENV}`);
+  console.log(`===>  Environment: ${NODE_ENV}`);
   console.log('--------------------------');
   /* eslint-enable no-console */
 };
