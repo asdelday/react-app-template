@@ -4,13 +4,13 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    mocha: true
+    mocha: true,
   },
   settings: {
     'import/resolver': {
       node: {
         extensions: ['', '.json', '.js', '.jsx'],
-        moduleDirectory: ['app', 'node_modules']
+        moduleDirectory: ['app', 'node_modules'],
       }
     }
   },
@@ -19,7 +19,7 @@ module.exports = {
     __CLIENT__: true,
     __SERVER__: true,
     __DISABLE_SSR__: true,
-    __DEVTOOLS__: true
+    __DEVTOOLS__: true,
   },
   rules: {
     'import/no-extraneous-dependencies': 'off',
@@ -30,6 +30,6 @@ module.exports = {
 
     'react/prefer-stateless-function': 'off',
     'react/require-default-props': 'off',
-    'react/forbid-prop-types': 'off'
+    'react/forbid-prop-types': 'off',
   },
 };
