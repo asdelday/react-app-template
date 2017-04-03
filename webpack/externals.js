@@ -9,8 +9,13 @@ import fs from 'fs';
  * dependencies. This library creates an externals function that
  * ignores node_modules when bundling in Webpack.
  */
-const externalModules = fs.readdirSync('node_modules')
+export const externalModules = fs.readdirSync('node_modules')
   .filter(x => ['.bin'].indexOf(x) === -1)
   .reduce((acc, cur) => Object.assign(acc, { [cur]: `commonjs ${cur}` }), {});
 
-export default externalModules;
+export const externalsTest = {
+  cheerio: 'window',
+  'react/addons': true,
+  'react/lib/ExecutionEnvironment': true,
+  'react/lib/ReactContext': true,
+};

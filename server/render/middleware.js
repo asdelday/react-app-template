@@ -12,12 +12,21 @@ export default function render(req, res) {
   const history = syncHistoryWithStore(memoryHistory, store);
   const routes = getRoutes();
 
-  // TODO: __DISABLE_SSR__ + hydrateOnClient
+  function hydrateOnClient() {
+    const html = pageRenderer(store);
+    res.status(200).send(html);
+  }
+
+  if (__DISABLE_SSR__) {
+    hydrateOnClient();
+    return;
+  }
 
   match({ routes, history, location }, (error, redirectLocation, renderProps) => {
     if (error) {
-      res.status(500).json(error);
-      // TODO: hydrateOnClient
+      console.error('ROUTER ERROR:', error); // eslint-disable-line no-console
+      res.status(500);
+      hydrateOnClient();
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {

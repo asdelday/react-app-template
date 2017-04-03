@@ -18,7 +18,7 @@ import path from 'path';
 import PATHS from '../config/paths';
 import rules from './rules';
 import plugins from './plugins';
-import externals from './externals';
+import { externalModules } from './externals';
 import resolve from './resolve';
 
 /**
@@ -41,7 +41,7 @@ export default (env = '') => {
     entry: { server: path.join(PATHS.server, 'index.js') },
     target: 'node',
     node,
-    externals,
+    externals: externalModules,
     output: {
       path: PATHS.compiled,
       filename: '[name].js',
@@ -61,8 +61,8 @@ export default (env = '') => {
     node,
     output: {
       path: PATHS.assets,
-      filename: '[name].js', // filename: '[name].[hash:6].js',
-      chunkFilename: '[name].[chunkhash:6].js', // for code splitting. will work without but useful to set
+      filename: '[name].[hash:6].js',
+      chunkFilename: '[name].[chunkhash:6].js',
       publicPath: PATHS.public,
     },
     module: { rules: rules({ production: true, browser: true }) },
@@ -78,7 +78,8 @@ export default (env = '') => {
     node,
     output: {
       path: PATHS.assets,
-      filename: '[name].js',
+      filename: '[name].[hash:6].js',
+      chunkFilename: '[name].[chunkhash:6].js',
       publicPath: PATHS.public,
     },
     module: { rules: rules({ production: false, browser: true }) },
@@ -93,7 +94,7 @@ export default (env = '') => {
     entry: { server: path.join(PATHS.server, 'index.js') },
     target: 'node',
     node,
-    externals,
+    externals: externalModules,
     output: {
       path: PATHS.compiled,
       filename: '[name].dev.js',
