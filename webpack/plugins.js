@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import AssetsPlugin from 'assets-webpack-plugin';
 import * as ENV from '../config/env';
 
 /**
@@ -38,7 +37,6 @@ export default ({ production = false, browser = false } = {}) => {
   if (!production && browser) {
     return plugins.concat([
       new webpack.HotModuleReplacementPlugin(),
-      new AssetsPlugin(),
       // new webpack.NoEmitOnErrorsPlugin(),
     ]);
   }
@@ -51,8 +49,7 @@ export default ({ production = false, browser = false } = {}) => {
   // PRODUCTION AND BROWSER
   if (production && browser) {
     return plugins.concat([
-      new ExtractTextPlugin({ filename: '[name].[hash:6].css', allChunks: true }),
-      new AssetsPlugin(),
+      new ExtractTextPlugin({ filename: '[name].css', allChunks: true }),
       new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
     ]);
   }

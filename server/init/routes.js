@@ -1,4 +1,7 @@
+/**
+ * Routes which should not go through the render middleware
+ * @param {object} app - Express app
+ */
 export default (app) => {
-  /* TODO */
-  app.get('/test', (req, res) => res.send('Hello World!'));
+  app.get('/test/a/different/route', (req, res) => res.send('Hello World!'));
 };

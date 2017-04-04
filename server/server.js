@@ -28,7 +28,7 @@ initExpress(app);
 initRoutes(app);
 
 // renderMiddleware matches the URL with react-router and renders the app into HTML
-app.get('*', renderMiddleware);
+app.use(renderMiddleware);
 
 /* eslint-disable no-console */
 const _port = app.get('port');

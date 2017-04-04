@@ -31,7 +31,12 @@ export default (env = '') => {
   const isBrowser = (env.indexOf('browser') >= 0);
   console.log(`Running webpack in ${process.env.NODE_ENV} mode on ${isBrowser ? 'browser' : 'server'}`); // eslint-disable-line no-console
 
-  const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+  const hotMiddlewareScript = [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+    'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
+  ];
+
   const node = { __dirname: true, __filename: true };
 
   // PRODUCTION - SERVER
@@ -61,7 +66,7 @@ export default (env = '') => {
     node,
     output: {
       path: PATHS.assets,
-      filename: '[name].[hash:6].js',
+      filename: '[name].js',
       chunkFilename: '[name].[chunkhash:6].js',
       publicPath: PATHS.public,
     },
@@ -74,11 +79,11 @@ export default (env = '') => {
   const devBrowserRender = {
     devtool: 'eval',
     context: PATHS.app,
-    entry: { app: [hotMiddlewareScript, path.join(PATHS.app, 'client.jsx')] },
+    entry: { app: [...hotMiddlewareScript, path.join(PATHS.app, 'client.jsx')] },
     node,
     output: {
       path: PATHS.assets,
-      filename: '[name].[hash:6].js',
+      filename: '[name].js',
       chunkFilename: '[name].[chunkhash:6].js',
       publicPath: PATHS.public,
     },
